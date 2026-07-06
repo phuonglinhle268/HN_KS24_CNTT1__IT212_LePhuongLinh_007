@@ -37,9 +37,10 @@ Tài liệu này ghi nhận đầy đủ lịch sử các yêu cầu (Prompts) n
 
 ---
 
-## Yêu cầu 2: Giải pháp Cộng dồn và Xử lý Concurrency trong SRS
+## Yêu cầu 2: Bổ sung Sơ đồ ER Diagram Mermaid và Giải pháp Cộng dồn và Xử lý Concurrency vào SRS
 ### Nội dung Prompt nhận được:
-> trong tài liệu srs cần đảm bảo chỉ ra được cách giải quyết bài toán "Cộng dồn giao dịch trong ngày" và xử lí daily limit hợp lí
+> trong srs
+>cần đảm bảo chỉ ra được cách giải quyết bài toán "Cộng dồn >giao dịch trong ngày" và xử lí daily limit hợp lí
 
 ### Giải pháp thực hiện:
 - Cập nhật tài liệu `SRS.md` tại **Mục 9**:
@@ -47,11 +48,7 @@ Tài liệu này ghi nhận đầy đủ lịch sử các yêu cầu (Prompts) n
   - **Bài toán Xử lý Đồng thời**: Áp dụng cơ chế **Pessimistic Locking (Khóa ghi bi quan `PESSIMISTIC_WRITE`)** tại tầng cơ sở dữ liệu để tuần tự hóa các yêu cầu chuyển khoản đồng thời từ cùng một tài khoản, ngăn chặn bypass hạn mức và double-spending.
   - **Đồng bộ hóa Mã nguồn**: Chuyển đổi mã nguồn trong `BankAccountRepository` và `TransferService` sử dụng `findByIdForUpdate` kết hợp sắp xếp khóa theo ID tài khoản để tránh deadlock.
 
----
-
-## Yêu cầu 3: Bổ sung Sơ đồ ER Diagram Mermaid vào SRS
-### Nội dung Prompt nhận được:
-> trong srs, với phần quan hệ giữa các entity
+>với phần quan hệ giữa các entity
 > Sinh sơ đồ ER Diagram bằng cú pháp Mermaid.
 >
 > Yêu cầu:
@@ -73,7 +70,7 @@ Tài liệu này ghi nhận đầy đủ lịch sử các yêu cầu (Prompts) n
 
 ---
 
-## Yêu cầu 4: Bổ sung các File Quản lý và Kế hoạch vào Dự án
+## Yêu cầu 3: Bổ sung các File Quản lý và Kế hoạch vào Dự án
 ### Nội dung Prompt nhận được:
 > bổ sung trong dự án file walkthrough.md, Prompt_History.md (file lịch sử prompt) và implementation plan
 
@@ -81,12 +78,3 @@ Tài liệu này ghi nhận đầy đủ lịch sử các yêu cầu (Prompts) n
 - Tạo mới và lưu trữ trực tiếp các tệp `walkthrough.md`, `implementation_plan.md` và `Prompt_History.md` tại thư mục gốc của dự án.
 - Đảm bảo đầy đủ nội dung mô tả chi tiết kế hoạch thực hiện, hướng dẫn kiểm thử và lịch sử thay đổi để đóng gói cùng sản phẩm bàn giao.
 
----
-
-## Yêu cầu 5: Việt hóa và Chuẩn hóa Lịch sử Prompt
-### Nội dung Prompt nhận được:
-> prompt_history cần đảm bảo tương đương với prompt nhận được và viết bằng tiếng việt
-
-### Giải pháp thực hiện:
-- Dịch toàn bộ nội dung của tệp `Prompt_History.md` sang tiếng Việt.
-- Bám sát các yêu cầu thực tế mà người dùng đã gửi vào hệ thống trong suốt phiên làm việc.
