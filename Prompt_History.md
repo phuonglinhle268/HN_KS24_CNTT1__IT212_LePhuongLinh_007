@@ -61,7 +61,8 @@ Tài liệu này ghi nhận đầy đủ lịch sử các yêu cầu (Prompts) n
 >   - Foreign Key
 >   - Các field nghiệp vụ chính.
 > - Định dạng đúng chuẩn Mermaid
-> Đồng thời đảm bảo toàn bộ source code đúng logic, hoàn chỉnh, đảm bảo clean code, đúng yêu cầu
+>
+> Đồng thời đảm bảo toàn bộ source code đúng logic, hoàn chỉnh, đảm bảo clean code, đúng yêu cầu, tối ưu
 
 ### Giải pháp thực hiện:
 - Thêm sơ đồ ER Diagram viết bằng cú pháp `erDiagram` của Mermaid vào **Mục 6** của `SRS.md`.
