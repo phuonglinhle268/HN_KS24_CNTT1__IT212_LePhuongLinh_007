@@ -92,9 +92,54 @@ Lưu trữ lịch sử giao dịch chuyển tiền.
 ---
 
 ## 6. Quan hệ giữa các Entity
-- Một `BankAccount` có thể liên kết với nhiều bản ghi `TransactionHistory` đóng vai trò là tài khoản nguồn (`fromAccount`).
-- Một `BankAccount` có thể liên kết với nhiều bản ghi `TransactionHistory` đóng vai trò là tài khoản đích (`toAccount`).
-- Mối quan hệ giữa `BankAccount` và `TransactionHistory` là `@ManyToOne` (Từ phía `TransactionHistory` chỉ tới `BankAccount`).
+
+### 6.1. Sơ đồ thực thể mối quan hệ (ER Diagram)
+
+Dưới đây là sơ đồ thực thể mối quan hệ (ER Diagram) biểu diễn các Entity trong hệ thống dưới dạng Mermaid:
+
+```mermaid
+erDiagram
+    CUSTOMER {
+        Long id PK
+        String fullName
+        String email
+        String phoneNumber
+        String identityNumber
+        String status
+        String role
+    }
+
+    BANK_ACCOUNT {
+        Long id PK
+        String accountNumber
+        BigDecimal balance
+        String currency
+        String accountType
+        String status
+        BigDecimal dailyLimit
+        Long customerId FK
+    }
+
+    TRANSACTION_HISTORY {
+        Long id PK
+        Long fromAccountId FK
+        Long toAccountId FK
+        BigDecimal amount
+        LocalDateTime transactionTime
+        String status
+        LocalDateTime createdAt
+        String description
+    }
+
+    CUSTOMER ||--o{ BANK_ACCOUNT : owns
+    BANK_ACCOUNT ||--o{ TRANSACTION_HISTORY : "sends (fromAccount)"
+    BANK_ACCOUNT ||--o{ TRANSACTION_HISTORY : "receives (toAccount)"
+```
+
+### 6.2. Chi tiết các mối quan hệ
+- **CUSTOMER - BANK_ACCOUNT**: Quan hệ một - nhiều ($1 - N$). Một khách hàng có thể sở hữu từ $0$ đến nhiều tài khoản ngân hàng. Tài khoản ngân hàng lưu khóa ngoại `customer_id` trỏ đến `Customer`.
+- **BANK_ACCOUNT - TRANSACTION_HISTORY (fromAccount)**: Quan hệ một - nhiều ($1 - N$). Một tài khoản ngân hàng có thể đóng vai trò là tài khoản nguồn (`fromAccount`) thực hiện gửi tiền trong $0$ đến nhiều giao dịch.
+- **BANK_ACCOUNT - TRANSACTION_HISTORY (toAccount)**: Quan hệ một - nhiều ($1 - N$). Một tài khoản ngân hàng có thể đóng vai trò là tài khoản đích (`toAccount`) nhận tiền trong $0$ đến nhiều giao dịch.
 
 ---
 
